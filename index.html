@@ -14,79 +14,87 @@ html,body{
 }
 
 
+/*整体比例*/
 .container{
+
     width:100%;
-    height:100vh;
+    height:auto;
+    position:relative;
+
 }
 
 
-/* SVG动画 */
+/*原图*/
+.chart{
 
-svg{
     width:100%;
-    height:100%;
+    display:block;
+
+    clip-path: inset(0 100% 0 0);
+
+    animation:
+    reveal 5s ease forwards;
+
 }
 
 
-/* 数据文字 */
+/*图片慢慢出现*/
 
-.label{
-    font-family:"Microsoft YaHei";
-    font-size:18px;
-    fill:#666;
-    opacity:0;
-    animation:textShow 1s forwards;
-}
-
-
-@keyframes textShow{
+@keyframes reveal{
 
 0%{
-opacity:0;
-transform:translateX(20px);
+clip-path:inset(0 100% 0 0);
 }
 
 100%{
-opacity:1;
-transform:translateX(0);
+clip-path:inset(0 0 0 0);
 }
 
 }
 
 
-/* 山峰动画 */
 
-.peak{
+/*文字层*/
 
-transform-origin:bottom;
+.text{
+
+position:absolute;
+right:0;
+top:0;
+
+opacity:0;
 
 animation:
 
-grow 2s forwards,
-float 3s infinite ease-in-out;
+textShow 5s ease forwards;
+
+animation-delay:2s;
 
 }
 
 
+/*文字淡入*/
 
-@keyframes grow{
+@keyframes textShow{
+
 
 0%{
-transform:scaleY(0);
+
+opacity:0;
+
+transform:translateY(20px);
+
 }
+
 
 100%{
-transform:scaleY(1);
-}
+
+opacity:1;
+
+transform:translateY(0);
 
 }
 
-
-@keyframes float{
-
-50%{
-transform:translateY(-5px);
-}
 
 }
 
@@ -102,110 +110,14 @@ transform:translateY(-5px);
 <div class="container">
 
 
-<svg viewBox="0 0 1200 500">
-
-
-<!-- 六个动态数据峰 -->
-
-<g fill="#b8dcbf">
-
-
-<path class="peak"
-style="animation-delay:.2s"
-d="
-M80 430
-Q120 200 160 430
-Z"/>
-
-
-<path class="peak"
-style="animation-delay:.5s"
-d="
-M230 430
-Q280 160 330 430
-Z"/>
-
-
-<path class="peak"
-style="animation-delay:.8s"
-d="
-M380 430
-Q450 100 520 430
-Z"/>
-
-
-<path class="peak"
-style="animation-delay:1.1s"
-d="
-M520 430
-Q610 80 700 430
-Z"/>
-
-
-<path class="peak"
-style="animation-delay:1.4s"
-d="
-M720 430
-Q790 220 860 430
-Z"/>
-
-
-<path class="peak"
-style="animation-delay:1.7s"
-d="
-M880 430
-Q950 260 1020 430
-Z"/>
-
-
-</g>
-
-
-
-<!-- 数据文字 -->
-
-
-<text x="850" y="100" class="label"
-style="animation-delay:2s">
-45.3% 相关理念和生活态度未深入人心
-</text>
-
-
-<text x="850" y="150" class="label"
-style="animation-delay:2.2s">
-50.3% 城市规划和社区管理力量不足
-</text>
-
-
-<text x="850" y="200" class="label"
-style="animation-delay:2.4s">
-62.6% 基础设施标准短时间难以达到
-</text>
-
-
-<text x="850" y="250" class="label"
-style="animation-delay:2.6s">
-64.7% 各地差异大不应统一模式
-</text>
-
-
-<text x="850" y="300" class="label"
-style="animation-delay:2.8s">
-39.6% 居民整体素质有待提升
-</text>
-
-
-<text x="850" y="350" class="label"
-style="animation-delay:3s">
-26.4% 重硬件设施轻社会服务
-</text>
-
-
-</svg>
+<img 
+class="chart"
+src="chart.png">
 
 
 </div>
 
 
 </body>
+
 </html>
